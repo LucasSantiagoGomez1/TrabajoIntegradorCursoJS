@@ -42,8 +42,8 @@ let nombre = prompt("ingrese su nombre completo");
 let dni = prompt("Igrese Su Numero de DNI");
 let telefono = prompt("Ingrese Su Numero De Telefono");
 let direccion = prompt("Ingrese su dirección para la entrega");
-var preciototal = 0;
-var precioplato = 0;
+let preciototal = 0;
+let precioplato = 0;
 const pedidos = [];
 
 
@@ -62,11 +62,22 @@ else{
     let npedidos = prompt("Ingrese Cuantos Platos Va A Pedir, Si Su Total Es Mayor A 600$ Se Realizara Un Pequeño Descuento.")
     console.log("El numero de pedidos es: " + npedidos);
     preciototal=(pedidoCompleto(preciototal, precioplato, npedidos));
+    console.log(pedidos);
     if(preciototal <= 600){
         alert("sus pedidos individuales son: ");
         for(const pedido of pedidos) {
             alert( "pedido N: " + pedido.id + " || nombre: "  + pedido.nombrePlato +  " ||  precio: " + pedido.precio);
         }
+        let revisar = prompt("Desea revisar algun pedido en particular (responder con si o no).")
+        if(revisar == "si"){
+            let eleccion = parseInt(prompt("que pedido desea revisar (seleccione por numero de pedido)"))
+            const resultado = pedidos.find( numero => numero.id === eleccion);
+            console.log(resultado);
+            alert("pedido N: " + resultado.id + " || nombre: " + resultado.nombrePlato + " || precio: " +resultado.precio);
+        }
+        const mayorA300 = pedidos.filter( el => el.precio > 300);
+        console.log("los platos con un precio mayor a 300 son: ");
+        console.log(mayorA300);
         alert("Su precio total es: " + preciototal)
     }
     else{
@@ -74,8 +85,18 @@ else{
         for(const pedido of pedidos) {
             alert( "pedido N: " + pedido.id + " || nombre: "  + pedido.nombrePlato +  " ||  precio: " + pedido.precio);
         }
-        var descuento = (preciototal * 5)/100;
-        var preciodescontado = preciototal - descuento;
+        let descuento = (preciototal * 5)/100;
+        let preciodescontado = preciototal - descuento;
+        let revisar = prompt("Desea revisar algun pedido en particular (responder con si o no).")
+        if(revisar == "si"){
+            let eleccion = parseInt(prompt("que pedido desea revisar (seleccione por numero de pedido)"))
+            const resultado = pedidos.find( numero => numero.id === eleccion);
+            console.log(resultado);
+            alert("pedido N: " + resultado.id + " || nombre: " + resultado.nombrePlato + " || precio: " +resultado.precio);
+        }
+        const mayorA300 = pedidos.filter( el => el.precio > 300);
+        console.log("los platos con un precio mayor a 300 son: ");
+        console.log(mayorA300);
         alert("Su precio total con descuento es: " + preciodescontado);
     }
     
