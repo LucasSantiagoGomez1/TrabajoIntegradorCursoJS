@@ -8,15 +8,11 @@ class Usuario {
         this.telefono = telefono;
         this.dirección = dirección;
     }
-    
-    darBienvenida() {
-        alert("bienvenido " + this.nombre + ".")
-    }
+
 }
 
 class pedido{
-    constructor(id, nombrePlato, precio){
-        this.id = id;
+    constructor(nombrePlato, precio){
         this.nombrePlato = nombrePlato;
         this.precio = precio;
     }
@@ -25,9 +21,6 @@ class pedido{
 
 function pedidoCompleto(vacumulador, vacumular, repeticiones){
     for(let i = 1 ; i <= repeticiones ; i++){
-        let nombreP = prompt("ingrese el nombre del " + i + " plato.");
-        vacumular = parseInt(prompt("ingrese el precio del " + i + " plato."));
-        pedidos.push(new pedido(i, nombreP, vacumular));
         console.log(vacumular);
         vacumulador += vacumular;
         console.log(vacumulador);
@@ -35,34 +28,181 @@ function pedidoCompleto(vacumulador, vacumular, repeticiones){
     return vacumulador
 }
 
-/* codigo y el resto*/
+function validarFormulario(e){
+    e.preventDefault();
 
-alert("Ingrese Sus Datos");
-let nombre = prompt("ingrese su nombre completo");
-let dni = prompt("Igrese Su Numero de DNI");
-let telefono = prompt("Ingrese Su Numero De Telefono");
-let direccion = prompt("Ingrese su dirección para la entrega");
-let preciototal = 0;
-let precioplato = 0;
-const pedidos = [];
-
-
-if(((nombre == "") || (nombre === null )) || ((dni == "") || (dni === null)) || ((telefono == "") || (telefono === null)) || ((direccion == "") || (direccion === null ))){
-
-    alert("Puede Que Algun Dato Le haya Faltado, Intentelo Nuevamente.")
-    console.log("incorrecto");
+    let formulario = e.target;
+    localStorage.setItem("nombreCompleto", formulario.children[0].value);
+    localStorage.setItem("documento", formulario.children[1].value);
+    localStorage.setItem("contacto", formulario.children[2].value);
+    localStorage.setItem("domicilio", formulario.children[3].value);
+    nombre = localStorage.getItem("nombreCompleto");
+    dni = localStorage.getItem("documento");
+    telefono = localStorage.getItem("contacto");
+    direccion = localStorage.getItem("domicilio");
+    let introduccion = document.getElementById("formularioP")
+    if(((nombre == "") || (nombre === null )) || ((dni == "") || (dni === null)) || ((telefono == "") || (telefono === null)) || ((direccion == "") || (direccion === null ))){
+        introduccion.innerText = "Le falta algun dato, intentelo nuevamente";
+    }
+    else{
+        introduccion.innerText = "Hola " + nombre + " |dni " + dni + " |telefono " + telefono + ".";
+    }
 }
 
-else{
+function pedidoCQ(){
+    let NP = 0
+    pedidos.push(new pedido("pizza cinco quesos", 300));
+    let cambio = document.getElementById("pedirCQ");
+    preciototal = preciototal + 300;
+    for(const pedido of pedidos){
+        if(pedido.nombrePlato == "pizza cinco quesos"){
+            NP++
+        }
+    }
+    if(NP >= 1){
+        cambio.innerText = "Pediste este plato " + NP + " veces";
+    }
+    let Total = document.getElementById("ValorTotal");
+    Total.innerText = "Su total actualmente es: " + preciototal;
+}
 
-    const usuario1 = new Usuario(nombre, dni, telefono, direccion);
-    console.log(usuario1);
-    usuario1.darBienvenida();
-    console.log("correcto");
-    let npedidos = prompt("Ingrese Cuantos Platos Va A Pedir, Si Su Total Es Mayor A 600$ Se Realizara Un Pequeño Descuento.")
-    console.log("El numero de pedidos es: " + npedidos);
-    preciototal=(pedidoCompleto(preciototal, precioplato, npedidos));
-    console.log(pedidos);
+function pedidoI(){
+    let NP = 0;
+    pedidos.push(new pedido("pizza italiana", 400));
+    let cambio = document.getElementById("pedirI");
+    preciototal = preciototal + 400;
+    for(const pedido of pedidos){
+        if(pedido.nombrePlato == "pizza italiana"){
+            NP++
+        }
+    }
+    if(NP >= 1){
+        cambio.innerText = "Pediste este plato " + NP + " veces";
+    }
+    let Total = document.getElementById("ValorTotal");
+    Total.innerText = "Su total actualmente es: " + preciototal;
+}
+
+function pedidoP(){
+    let NP = 0;
+    pedidos.push(new pedido("pizza pepperoni", 400));
+    let cambio = document.getElementById("pedirP");
+    preciototal = preciototal + 400;
+    for(const pedido of pedidos){
+        if(pedido.nombrePlato == "pizza pepperoni"){
+            NP++
+        }
+    }
+    if(NP >= 1){
+        cambio.innerText = "Pediste este plato " + NP + " veces";
+    }
+    let Total = document.getElementById("ValorTotal");
+    Total.innerText = "Su total actualmente es: " + preciototal;
+}
+
+function pedidoC(){
+    let NP = 0;
+    pedidos.push(new pedido("pizza carbonara", 500));
+    let cambio = document.getElementById("pedirC");
+    preciototal = preciototal + 500;
+    for(const pedido of pedidos){
+        if(pedido.nombrePlato == "pizza carbonara"){
+            NP++
+        }
+    }
+    if(NP >= 1){
+        cambio.innerText = "Pediste este plato " + NP + " veces";
+    }
+    let Total = document.getElementById("ValorTotal");
+    Total.innerText = "Su total actualmente es: " + preciototal;
+}
+
+function pedidoH(){
+    let NP = 0;
+    pedidos.push(new pedido("pizza hawaiana", 700));
+    let cambio = document.getElementById("pedirH");
+    preciototal = preciototal + 700;
+    for(const pedido of pedidos){
+        if(pedido.nombrePlato == "pizza hawaiana"){
+            NP++
+        }
+    }
+    if(NP >= 1){
+        cambio.innerText = "Pediste este plato " + NP + " veces";
+    }
+    let Total = document.getElementById("ValorTotal");
+    Total.innerText = "Su total actualmente es: " + preciototal;
+}
+
+function calculo(){
+    if(preciototal >= 600){
+        let descuento = (preciototal * 5)/100
+        let cambio = document.getElementById("total");
+        cambio.innerText = "Su total a pagar con descuento es: " + (preciototal - descuento);
+    }
+    else{
+        let cambio = document.getElementById("total");
+        cambio.innerText = "Su total a pagar es: " + preciototal;
+    }
+}
+/*
+
+Mi objetivo era crear un botos que al precionarlo mostraria una lista de todods los pedidos realiados, pero solo muestra el ultimo pedido realizado en lugar de todos, entonces me gustaria pedir ayuda por una solucion para un futuro
+
+function Rpedidos(){
+    let cambio = document.getElementById("revision")
+    for(const revisar of pedidos){
+        cambio.innerHTML = revisar.nombrePlato + revisar.precio;
+    }
+}
+*/
+
+/* codigo y el resto*/
+
+let nombre;
+let dni;
+let telefono;
+let direccion;
+let preciototal = 0;
+const pedidos = [];
+
+let miformulario = document.getElementById("formulario");
+miformulario.addEventListener("submit", validarFormulario);
+
+let eleccionCQ = document.getElementById("pedirCQ")
+eleccionCQ.addEventListener("click", pedidoCQ)
+
+let eleccionI = document.getElementById("pedirI")
+eleccionI.addEventListener("click", pedidoI)
+
+let eleccionP = document.getElementById("pedirP")
+eleccionP.addEventListener("click", pedidoP)
+
+let eleccionC = document.getElementById("pedirC")
+eleccionC.addEventListener("click", pedidoC)
+
+let eleccionH = document.getElementById("pedirH")
+eleccionH.addEventListener("click", pedidoH)
+
+let pagar = document.getElementById("pago")
+pagar.addEventListener("click",calculo)
+
+/*
+let revision = document.getElementById("revisor")
+revision.addEventListener("click",Rpedidos)
+*/
+
+
+
+
+
+
+
+
+
+
+
+/*
     if(preciototal <= 600){
         alert("sus pedidos individuales son: ");
         for(const pedido of pedidos) {
@@ -99,5 +239,4 @@ else{
         console.log(mayorA300);
         alert("Su precio total con descuento es: " + preciodescontado);
     }
-    
-}
+*/

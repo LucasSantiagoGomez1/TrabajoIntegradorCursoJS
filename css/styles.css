@@ -3,8 +3,13 @@ h1{
 }
 h2{
     color: blueviolet;
+    padding: 10px;
 }
 
 body{
     background-color: bisque;
+}
+
+li{
+    padding: 10px;
 }

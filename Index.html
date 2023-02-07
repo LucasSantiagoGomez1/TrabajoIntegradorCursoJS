@@ -11,13 +11,58 @@
 
     <h1> Pizzeria</h1>
 
-<p>
+    <h2>
+        ingrese sus datos
+    </h2>
+    <p>
+    <h2 id="formularioP"></h2>
+        <form id="formulario">
+            <input type="text" id="nombre" placeholder="Nombre y Apellido">
+            <input type="numbers" id="dni" placeholder="DNI">
+            <input type="numbers" id="telefono" placeholder="Telefono">
+            <input type="text" id="direccion" placeholder="Dirección">
+            <input type="submit" value="Enviar Datos">
+       </form>
+    </p>
 
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas quod dicta sunt commodi. Praesentium, nesciunt alias animi neque adipisci facere omnis aspernatur! Sunt perferendis soluta repudiandae, nesciunt earum architecto consequuntur?
+    <h2> Menú </h2>
+    <ul>
 
-</p>
+        <li>
+            pizza cinco quesos = 300$
+            <button id="pedirCQ" >pedir</button>
+        </li>
+        <li>
+            pizza italiana = 400$
+            <button id="pedirI">pedir</button>
+        </li>
+        <li>
+            pizza pepperoni = 400$
+            <button id="pedirP">pedir</button>
+        </li>
+        <li>
+            pizza carbonara = 500$
+            <button id="pedirC">pedir</button>
+        </li>
+        <li>
+            pizza hawaiana = 700$
+            <button id="pedirH">pedir</button>
+        </li>
 
+    </ul>
 
+    <h2 id="ValorTotal"> Aqui se mostrara su total</h2>
+
+    <!--
+    <h2> Desea revisar su pedido</h2>
+    <button id="revisor"> si </button>
+    <ul id="revision"> </ul>
+    -->
+    
+    <h2>-----------------------------------------------------------</h2>
+    <h2> Proceder al Pago</h2>
+    <button id="pago">Pagar</button>
+    <h2 id="total"> </h2>
 </body>
 
 <script src="js/syte.js"></script>
