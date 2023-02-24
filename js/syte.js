@@ -19,16 +19,8 @@ class pedido{
 
 }
 
-function pedidoCompleto(vacumulador, vacumular, repeticiones){
-    for(let i = 1 ; i <= repeticiones ; i++){
-        console.log(vacumular);
-        vacumulador += vacumular;
-        console.log(vacumulador);
-    }
-    return vacumulador
-}
-
 function validarFormulario(e){
+
     e.preventDefault();
 
     let formulario = e.target;
@@ -42,25 +34,43 @@ function validarFormulario(e){
     direccion = localStorage.getItem("domicilio");
     let introduccion = document.getElementById("formularioP")
     if(((nombre == "") || (nombre === null )) || ((dni == "") || (dni === null)) || ((telefono == "") || (telefono === null)) || ((direccion == "") || (direccion === null ))){
-        introduccion.innerText = "Le falta algun dato, intentelo nuevamente";
+        introduccion.innerText = "Le falta algun dato.";
+        Swal.fire(
+            'Incorercto',
+            'Le falta agregar algun dato',
+            'error'
+        )
     }
     else{
         introduccion.innerText = "Hola " + nombre + " |dni " + dni + " |telefono " + telefono + ".";
+        Swal.fire(
+            'Bien',
+            'Los datos fueron recibidos correctamente',
+            'success'
+        )
     }
 }
 
 function pedidoCQ(){
-    let NP = 0
+    let NP = 0;
+    let CQ;
+    preciototal = 0;
     pedidos.push(new pedido("pizza cinco quesos", 300));
     let cambio = document.getElementById("pedirCQ");
-    preciototal = preciototal + 300;
     for(const pedido of pedidos){
         if(pedido.nombrePlato == "pizza cinco quesos"){
             NP++
+            guardarLocal("almacenamientoNPCQ",parseInt(NP))
         }
     }
+    CQ = localStorage.getItem("almacenamientoNPCQ")
     if(NP >= 1){
-        cambio.innerText = "Pediste este plato " + NP + " veces";
+        cambio.innerText = "Pediste este plato " + CQ + " veces";
+    }
+    guardarLocal("almacenamiento",JSON.stringify(pedidos))
+    const prueba = JSON.parse(localStorage.getItem("almacenamiento"))
+    for(const objeto of prueba){
+        preciototal = preciototal + objeto.precio ;
     }
     let Total = document.getElementById("ValorTotal");
     Total.innerText = "Su total actualmente es: " + preciototal;
@@ -68,16 +78,24 @@ function pedidoCQ(){
 
 function pedidoI(){
     let NP = 0;
+    let I;
+    preciototal = 0;
     pedidos.push(new pedido("pizza italiana", 400));
     let cambio = document.getElementById("pedirI");
-    preciototal = preciototal + 400;
     for(const pedido of pedidos){
         if(pedido.nombrePlato == "pizza italiana"){
             NP++
+            guardarLocal("almacenamientoNPI",parseInt(NP))
         }
     }
+    I = localStorage.getItem("almacenamientoNPI")
     if(NP >= 1){
-        cambio.innerText = "Pediste este plato " + NP + " veces";
+        cambio.innerText = "Pediste este plato " + I + " veces";
+    }
+    guardarLocal("almacenamiento",JSON.stringify(pedidos))
+    const prueba = JSON.parse(localStorage.getItem("almacenamiento"))
+    for(const objeto of prueba){
+        preciototal = preciototal + objeto.precio ;
     }
     let Total = document.getElementById("ValorTotal");
     Total.innerText = "Su total actualmente es: " + preciototal;
@@ -85,16 +103,24 @@ function pedidoI(){
 
 function pedidoP(){
     let NP = 0;
+    let P;
+    preciototal = 0;
     pedidos.push(new pedido("pizza pepperoni", 400));
     let cambio = document.getElementById("pedirP");
-    preciototal = preciototal + 400;
     for(const pedido of pedidos){
         if(pedido.nombrePlato == "pizza pepperoni"){
             NP++
+            guardarLocal("almacenamientoNPP",parseInt(NP))
         }
     }
+    P = localStorage.getItem("almacenamientoNPP")
     if(NP >= 1){
-        cambio.innerText = "Pediste este plato " + NP + " veces";
+        cambio.innerText = "Pediste este plato " + P + " veces";
+    }
+    guardarLocal("almacenamiento",JSON.stringify(pedidos))
+    const prueba = JSON.parse(localStorage.getItem("almacenamiento"))
+    for(const objeto of prueba){
+        preciototal = preciototal + objeto.precio ;
     }
     let Total = document.getElementById("ValorTotal");
     Total.innerText = "Su total actualmente es: " + preciototal;
@@ -102,16 +128,24 @@ function pedidoP(){
 
 function pedidoC(){
     let NP = 0;
+    let C;
+    preciototal = 0;
     pedidos.push(new pedido("pizza carbonara", 500));
     let cambio = document.getElementById("pedirC");
-    preciototal = preciototal + 500;
     for(const pedido of pedidos){
         if(pedido.nombrePlato == "pizza carbonara"){
             NP++
+            guardarLocal("almacenamientoNPC",parseInt(NP))
         }
     }
+    C = localStorage.getItem("almacenamientoNPC")
     if(NP >= 1){
-        cambio.innerText = "Pediste este plato " + NP + " veces";
+        cambio.innerText = "Pediste este plato " + C + " veces";
+    }
+    guardarLocal("almacenamiento",JSON.stringify(pedidos))
+    const prueba = JSON.parse(localStorage.getItem("almacenamiento"))
+    for(const objeto of prueba){
+        preciototal = preciototal + objeto.precio ;
     }
     let Total = document.getElementById("ValorTotal");
     Total.innerText = "Su total actualmente es: " + preciototal;
@@ -119,16 +153,24 @@ function pedidoC(){
 
 function pedidoH(){
     let NP = 0;
+    let H;
+    preciototal = 0;
     pedidos.push(new pedido("pizza hawaiana", 700));
     let cambio = document.getElementById("pedirH");
-    preciototal = preciototal + 700;
     for(const pedido of pedidos){
         if(pedido.nombrePlato == "pizza hawaiana"){
             NP++
+            guardarLocal("almacenamientoNPH",parseInt(NP))
         }
     }
+    H = localStorage.getItem("almacenamientoNPH")
     if(NP >= 1){
-        cambio.innerText = "Pediste este plato " + NP + " veces";
+        cambio.innerText = "Pediste este plato " + H + " veces";
+    }
+    guardarLocal("almacenamiento",JSON.stringify(pedidos))
+    const prueba = JSON.parse(localStorage.getItem("almacenamiento"))
+    for(const objeto of prueba){
+        preciototal = preciototal + objeto.precio ;
     }
     let Total = document.getElementById("ValorTotal");
     Total.innerText = "Su total actualmente es: " + preciototal;
@@ -145,17 +187,8 @@ function calculo(){
         cambio.innerText = "Su total a pagar es: " + preciototal;
     }
 }
-/*
 
-Mi objetivo era crear un botos que al precionarlo mostraria una lista de todods los pedidos realiados, pero solo muestra el ultimo pedido realizado en lugar de todos, entonces me gustaria pedir ayuda por una solucion para un futuro
-
-function Rpedidos(){
-    let cambio = document.getElementById("revision")
-    for(const revisar of pedidos){
-        cambio.innerHTML = revisar.nombrePlato + revisar.precio;
-    }
-}
-*/
+const guardarLocal = (clave, valor) => { localStorage.setItem(clave,valor)}
 
 /* codigo y el resto*/
 
@@ -163,8 +196,21 @@ let nombre;
 let dni;
 let telefono;
 let direccion;
-let preciototal = 0;
-const pedidos = [];
+let preciototal;
+const pedidos = [] ;
+
+nombre = localStorage.getItem("nombreCompleto");
+dni = localStorage.getItem("documento");
+telefono = localStorage.getItem("contacto");
+direccion = localStorage.getItem("domicilio");
+let introduccion = document.getElementById("formularioP")
+if(((nombre == "") || (nombre === null )) || ((dni == "") || (dni === null)) || ((telefono == "") || (telefono === null)) || ((direccion == "") || (direccion === null ))){
+}
+else{
+    introduccion.innerText = "Hola " + nombre + " |dni " + dni + " |telefono " + telefono + ".";
+}
+
+const prueba = JSON.parse(localStorage.getItem("almacenamiento"))
 
 let miformulario = document.getElementById("formulario");
 miformulario.addEventListener("submit", validarFormulario);
@@ -187,56 +233,21 @@ eleccionH.addEventListener("click", pedidoH)
 let pagar = document.getElementById("pago")
 pagar.addEventListener("click",calculo)
 
-/*
-let revision = document.getElementById("revisor")
-revision.addEventListener("click",Rpedidos)
-*/
 
 
+fetch('https://jsonplaceholder.typicode.com/users')
+    .then(response => response.json())
+    .then( data => {
 
+        const lista = document.querySelector('#listado')
 
-
-
-
-
-
-
-
-/*
-    if(preciototal <= 600){
-        alert("sus pedidos individuales son: ");
-        for(const pedido of pedidos) {
-            alert( "pedido N: " + pedido.id + " || nombre: "  + pedido.nombrePlato +  " ||  precio: " + pedido.precio);
-        }
-        let revisar = prompt("Desea revisar algun pedido en particular (responder con si o no).")
-        if(revisar == "si"){
-            let eleccion = parseInt(prompt("que pedido desea revisar (seleccione por numero de pedido)"))
-            const resultado = pedidos.find( numero => numero.id === eleccion);
-            console.log(resultado);
-            alert("pedido N: " + resultado.id + " || nombre: " + resultado.nombrePlato + " || precio: " +resultado.precio);
-        }
-        const mayorA300 = pedidos.filter( el => el.precio > 300);
-        console.log("los platos con un precio mayor a 300 son: ");
-        console.log(mayorA300);
-        alert("Su precio total es: " + preciototal)
-    }
-    else{
-        alert("sus pedidos individuales son: ");
-        for(const pedido of pedidos) {
-            alert( "pedido N: " + pedido.id + " || nombre: "  + pedido.nombrePlato +  " ||  precio: " + pedido.precio);
-        }
-        let descuento = (preciototal * 5)/100;
-        let preciodescontado = preciototal - descuento;
-        let revisar = prompt("Desea revisar algun pedido en particular (responder con si o no).")
-        if(revisar == "si"){
-            let eleccion = parseInt(prompt("que pedido desea revisar (seleccione por numero de pedido)"))
-            const resultado = pedidos.find( numero => numero.id === eleccion);
-            console.log(resultado);
-            alert("pedido N: " + resultado.id + " || nombre: " + resultado.nombrePlato + " || precio: " +resultado.precio);
-        }
-        const mayorA300 = pedidos.filter( el => el.precio > 300);
-        console.log("los platos con un precio mayor a 300 son: ");
-        console.log(mayorA300);
-        alert("Su precio total con descuento es: " + preciodescontado);
-    }
-*/
+        data.forEach((Usuario) => {
+            const li = document.createElement('li')
+            li.innerHTML = `
+                <h4>${Usuario.username}</h4>
+                <p>${Usuario.name}</p>
+                <p>${Usuario.email}</p>
+                <hr/>`
+            lista.append(li)
+        })
+    })
